@@ -26,12 +26,12 @@ public class Student {
     @Column(nullable = false)
     private LocalDate birthDate;
     private LocalDateTime registrationDate;
-    @ManyToOne (cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "department_id") // Like reference name
     private Department department; // Foreign key
 
-    @OneToMany(mappedBy = "students")
-    @JoinColumn(name = "course_id") // Like reference name
+    @OneToMany(mappedBy = "student")
+     // Like reference name
     private List<Course> courseList;  // Foreign key
 
     public Student() {
