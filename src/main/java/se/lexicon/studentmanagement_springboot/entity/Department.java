@@ -21,9 +21,10 @@ public class Department {
     private String Name;
 
     @OneToMany
-    @JoinColumn(name= "department_id")
+    @JoinColumn(name= "course_id")
     private List<Course> courseList;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "department")  // Look at student class and refer the join column at
+    // join colum of department filed
     private List<Student> students;
 
 

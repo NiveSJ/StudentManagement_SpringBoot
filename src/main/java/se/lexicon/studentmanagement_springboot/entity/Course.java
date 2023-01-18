@@ -19,6 +19,7 @@ public class Course {
     private String semester;
    @ManyToOne
    private Department department;
-  @OneToMany
-  private List<Student> students;
+  @ManyToOne
+  @JoinColumn(name = "student_id")
+  private Student student;
 }
