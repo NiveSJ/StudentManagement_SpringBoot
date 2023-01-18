@@ -25,19 +25,16 @@ public class Student {
     private String email;
     @Column(nullable = false)
     private LocalDate birthDate;
-    private boolean status;
     private LocalDateTime registrationDate;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "department_id") // Like reference name
-    private Department department; // Foreign key 
+    private Department department; // Foreign key
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "course_id") // Like reference name
     private List<Course> courseList;  // Foreign key
 
     public Student() {
-
-        this.status = true;
         this.registrationDate = LocalDateTime.now();
     }
 

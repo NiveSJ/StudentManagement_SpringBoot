@@ -20,7 +20,7 @@ public class Department {
     @Column(nullable = false)
     private String Name;
 
-    @OneToMany()
+    @OneToMany
     @JoinColumn(name= "department_id")
     private List<Course> courseList;
     @OneToMany(cascade = CascadeType.ALL)
