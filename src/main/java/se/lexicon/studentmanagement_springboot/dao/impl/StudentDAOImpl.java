@@ -70,6 +70,7 @@ public class StudentDAOImpl implements IStudentDAO {
     @Override
     @Transactional
     public void remove(String id) {
+        // ask about remove methods inside entity
         Student student = entityManager.find(Student.class, id);
         if (student == null) System.out.println("No Such Student Exception");
          entityManager.remove(student);

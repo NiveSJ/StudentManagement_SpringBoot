@@ -24,12 +24,36 @@ public class AppCommandLineRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Student student = new Student("Nive","Jay","Nive@gmail.com", LocalDate.parse("10-12-2020"));
-        studentDAO.persist(student);
+        Student student = new Student("Nive","Jay","Nive@gmail.com", LocalDate.parse("2020-01-01"));
 
         Department department = new Department("Computer Science and Engineering");
 
+
+
         Course course= new Course("System Software",4);
+        Course course1= new Course("Digital Design",4);
+
+        courseDAO.persist(course);
+        courseDAO.persist(course1);
+
+        departmentDAO.persist(department);
+
+
+
+        student.addCourse(course);
+        student.addCourse(course1);
+
+
+        department.addCourse(course);
+        department.addCourse(course1);
+
+        department.addStudent(student);
+        course.addStudent(student);
+
+
+        studentDAO.persist(student);
+
+
 
 
 

@@ -3,6 +3,7 @@ package se.lexicon.studentmanagement_springboot.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,7 +22,7 @@ public class Course {
    private Department department;
   @ManyToMany
   @JoinColumn(name = "student_id")
-  private List<Student> studentList;
+  private List<Student> studentList= new ArrayList<>();
 
     public Course(String courseName, int semester) {
 

@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,10 +24,10 @@ public class Department {
 
     @OneToMany (mappedBy = "department")
 
-    private List<Course> courseList;
+    private List<Course> courseList= new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "department")  // Look at student class and refer the join column at
     // join colum of department filed
-    private List<Student> studentsList;
+    private List<Student> studentsList=new ArrayList<>();
 
     public Department() {
     }

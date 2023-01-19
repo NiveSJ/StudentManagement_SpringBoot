@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 @Entity
@@ -31,7 +32,7 @@ public class Student {
     private Department department; // Foreign key
 
     @ManyToMany (mappedBy = "studentList")
-    private List<Course> courseList;
+    private List<Course> courseList=new ArrayList<>();
 
     public Student() {
         this.registrationDate = LocalDateTime.now();
