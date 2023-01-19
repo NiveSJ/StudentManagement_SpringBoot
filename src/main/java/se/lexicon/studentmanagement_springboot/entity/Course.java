@@ -13,14 +13,15 @@ public class Course {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     private String courseName;
     @Column(nullable = false)
     private int semester;
    @ManyToOne
    @JoinColumn(name= "department_id")
    private Department department;
-  @ManyToMany
+  @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,
+          CascadeType.PERSIST,CascadeType.REFRESH})
   @JoinColumn(name = "student_id")
   private List<Student> studentList= new ArrayList<>();
 
@@ -28,6 +29,10 @@ public class Course {
 
         this.courseName = courseName;
         this.semester = semester;
+
+    }
+
+    public Course() {
 
     }
 

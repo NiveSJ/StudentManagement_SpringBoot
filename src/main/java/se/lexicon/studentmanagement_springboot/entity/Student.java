@@ -27,11 +27,12 @@ public class Student {
     @Column(nullable = false)
     private LocalDate birthDate;
     private LocalDateTime registrationDate;
-    @ManyToOne
-    @JoinColumn(name = "department_id") // Like reference name
-    private Department department; // Foreign key
+   // @ManyToOne
+    //@JoinColumn(name = "department_id") // Like reference name
+    //private Department department; // Foreign key
 
-    @ManyToMany (mappedBy = "studentList")
+    @ManyToMany (mappedBy = "studentList",cascade = {CascadeType.DETACH,CascadeType.MERGE,
+            CascadeType.PERSIST,CascadeType.REFRESH})
     private List<Course> courseList=new ArrayList<>();
 
     public Student() {
@@ -96,13 +97,7 @@ public class Student {
         this.registrationDate = registrationDate;
     }
 
-    public Department getDepartment() {
-        return department;
-    }
 
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
 
     public List<Course> getCourseList() {
         return courseList;
@@ -126,25 +121,17 @@ public class Student {
     }
 
 
-
-
-
-
-
-
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return Objects.equals(id, student.id) && Objects.equals(firstName, student.firstName) && Objects.equals(lastName, student.lastName) && Objects.equals(email, student.email) && Objects.equals(birthDate, student.birthDate) && Objects.equals(registrationDate, student.registrationDate) && Objects.equals(department, student.department) && Objects.equals(courseList, student.courseList);
+        return Objects.equals(id, student.id) && Objects.equals(firstName, student.firstName) && Objects.equals(lastName, student.lastName) && Objects.equals(email, student.email) && Objects.equals(birthDate, student.birthDate) && Objects.equals(registrationDate, student.registrationDate) && Objects.equals(courseList, student.courseList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, birthDate, registrationDate, department, courseList);
+        return Objects.hash(id, firstName, lastName, email, birthDate, registrationDate, courseList);
     }
 
     @Override
@@ -156,7 +143,6 @@ public class Student {
                 ", email='" + email + '\'' +
                 ", birthDate=" + birthDate +
                 ", registrationDate=" + registrationDate +
-                ", department=" + department +
                 ", courseList=" + courseList +
                 '}';
     }
