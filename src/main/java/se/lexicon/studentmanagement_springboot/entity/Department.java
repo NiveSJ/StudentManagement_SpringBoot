@@ -31,6 +31,12 @@ public class Department {
     public Department() {
     }
 
+    public Department( String name) {
+
+        Name = name;
+
+    }
+
     public String getDepartment_id() {
         return department_id;
     }

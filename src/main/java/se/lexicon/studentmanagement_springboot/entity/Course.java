@@ -15,7 +15,7 @@ public class Course {
     @Column(nullable = false)
     private String courseName;
     @Column(nullable = false)
-    private String semester;
+    private int semester;
    @ManyToOne
    @JoinColumn(name= "department_id")
    private Department department;
@@ -23,8 +23,12 @@ public class Course {
   @JoinColumn(name = "student_id")
   private List<Student> studentList;
 
+    public Course(String courseName, int semester) {
 
+        this.courseName = courseName;
+        this.semester = semester;
 
+    }
 
     public String getId() {
         return id;
@@ -42,11 +46,11 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public String getSemester() {
+    public int getSemester() {
         return semester;
     }
 
-    public void setSemester(String semester) {
+    public void setSemester(int semester) {
         this.semester = semester;
     }
 

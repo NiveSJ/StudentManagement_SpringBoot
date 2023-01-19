@@ -37,15 +37,14 @@ public class Student {
         this.registrationDate = LocalDateTime.now();
     }
 
-    public Student(String id, String firstName, String lastName, String email, LocalDate birthDate, LocalDateTime registrationDate, Department department, List<Course> courseList) {
-        this.id = id;
+    public Student(String firstName, String lastName, String email, LocalDate birthDate) {
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.birthDate = birthDate;
-        this.registrationDate = registrationDate;
-        this.department = department;
-        this.courseList = courseList;
+
+
     }
 
     public String getId() {
