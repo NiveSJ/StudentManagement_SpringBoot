@@ -1,7 +1,6 @@
 package se.lexicon.studentmanagement_springboot.entity;
 
 import org.hibernate.annotations.GenericGenerator;
-import se.lexicon.studentmanagement_springboot.entity.Department;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,9 +19,12 @@ public class Course {
    @ManyToOne
    @JoinColumn(name= "department_id")
    private Department department;
-  @ManyToOne
+  @ManyToMany
   @JoinColumn(name = "student_id")
-  private Student student;
+  private List<Student> studentList;
+
+
+
 
     public String getId() {
         return id;
@@ -56,25 +58,37 @@ public class Course {
         this.department = department;
     }
 
-    public Student getStudent() {
-        return student;
+    public List<Student> getStudentList() {
+        return studentList;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
     }
+
+
+    public void addStudent(Student student) {
+        studentList.add(student);
+        student.getCourseList().add(this);
+    }
+    public void removeStudent(Student student) {
+        student.getCourseList().remove(this);
+        studentList.remove(student);
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Course course = (Course) o;
-        return Objects.equals(id, course.id) && Objects.equals(courseName, course.courseName) && Objects.equals(semester, course.semester) && Objects.equals(department, course.department) && Objects.equals(student, course.student);
+        return Objects.equals(id, course.id) && Objects.equals(courseName, course.courseName) && Objects.equals(semester, course.semester) && Objects.equals(department, course.department) && Objects.equals(studentList, course.studentList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, courseName, semester, department, student);
+        return Objects.hash(id, courseName, semester, department, studentList);
     }
 
     @Override
@@ -84,7 +98,7 @@ public class Course {
                 ", courseName='" + courseName + '\'' +
                 ", semester='" + semester + '\'' +
                 ", department=" + department +
-                ", student=" + student +
+                ", studentList=" + studentList +
                 '}';
     }
 }

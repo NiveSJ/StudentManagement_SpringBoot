@@ -30,8 +30,7 @@ public class Student {
     @JoinColumn(name = "department_id") // Like reference name
     private Department department; // Foreign key
 
-    @OneToMany(mappedBy = "student")
-     // Like reference name
+    @ManyToMany (mappedBy = "studentList")
     private List<Course> courseList;
 
     public Student() {
@@ -112,6 +111,28 @@ public class Student {
     public void setCourseList(List<Course> courseList) {
         this.courseList = courseList;
     }
+
+    // Add student and remove student
+
+    // private List<Course> courseList;
+
+    public void addCourse(Course course) {
+        courseList.add(course);
+        course.getStudentList().add(this);
+    }
+    public void removeCourse(Course course) {
+        course.getStudentList().remove(this);
+        courseList.remove(course);
+    }
+
+
+
+
+
+
+
+
+
 
     @Override
     public boolean equals(Object o) {

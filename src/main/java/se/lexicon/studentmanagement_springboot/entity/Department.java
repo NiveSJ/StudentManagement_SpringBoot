@@ -26,7 +26,7 @@ public class Department {
     private List<Course> courseList;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "department")  // Look at student class and refer the join column at
     // join colum of department filed
-    private List<Student> students;
+    private List<Student> studentsList;
 
     public Department() {
     }
@@ -55,12 +55,37 @@ public class Department {
         this.courseList = courseList;
     }
 
-    public List<Student> getStudents() {
-        return students;
+    public List<Student> getStudentsList() {
+        return studentsList;
     }
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
+    public void setStudentsList(List<Student> studentsList) {
+        this.studentsList = studentsList;
+    }
+
+
+    //  To populate and remove student list
+
+
+    public void addStudent(Student student) {
+        studentsList.add(student);
+        student.setDepartment(this);
+    }
+
+    public void removeStudent(Student student) {
+        student.setDepartment(null);
+        studentsList.remove(student);
+    }
+
+
+    public void addCourse(Course course) {
+        courseList.add(course);
+        course.setDepartment(this);
+    }
+
+    public void removeCourse(Course course) {
+        course.setDepartment(null);
+        courseList.remove(course);
     }
 
     @Override
@@ -68,12 +93,12 @@ public class Department {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Department that = (Department) o;
-        return Objects.equals(department_id, that.department_id) && Objects.equals(Name, that.Name) && Objects.equals(courseList, that.courseList) && Objects.equals(students, that.students);
+        return Objects.equals(department_id, that.department_id) && Objects.equals(Name, that.Name) && Objects.equals(courseList, that.courseList) && Objects.equals(studentsList, that.studentsList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(department_id, Name, courseList, students);
+        return Objects.hash(department_id, Name, courseList, studentsList);
     }
 
     @Override
@@ -82,7 +107,7 @@ public class Department {
                 "department_id='" + department_id + '\'' +
                 ", Name='" + Name + '\'' +
                 ", courseList=" + courseList +
-                ", students=" + students +
+                ", studentsList=" + studentsList +
                 '}';
     }
 }
