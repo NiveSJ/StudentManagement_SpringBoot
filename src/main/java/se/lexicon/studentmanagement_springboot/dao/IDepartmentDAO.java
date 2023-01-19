@@ -1,4 +1,9 @@
 package se.lexicon.studentmanagement_springboot.dao;
 
-public interface IDepartmentDAO {
+import se.lexicon.studentmanagement_springboot.entity.Department;
+
+public interface IDepartmentDAO extends BaseDAO<Department,String> {
+
+
+
 }
