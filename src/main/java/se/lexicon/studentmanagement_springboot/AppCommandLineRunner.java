@@ -28,10 +28,13 @@ public class AppCommandLineRunner implements CommandLineRunner {
 
         Department department = new Department("Computer Science and Engineering");
 
-
-
         Course course= new Course("System Software",4);
         Course course1= new Course("Digital Design",4);
+
+        // Persist Course and department first as Student depend on Those (If fail to do so, got
+        //  org.hibernate.TransientPropertyValueException: object references an unsaved transient instance -
+        //  save the transient instance before flushing :
+        //  se.lexicon.studentmanagement_springboot.entity.Student.department)
 
         courseDAO.persist(course);
         courseDAO.persist(course1);
